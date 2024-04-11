@@ -17,10 +17,12 @@ import java.util.UUID;
 public class User {
     @Id
     private UUID id;
+    @Column(nullable = false, unique = true)
     private String username;
     private String firstName;
     private String lastName;
     private String email;
+    @Column(nullable = false)
     private String password;
     private String phoneNumber;
 

@@ -18,6 +18,7 @@ public class Tag {
             strategy = GenerationType.IDENTITY
     )
     private int id;
+    @Column(nullable = false)
     private String name;
 
     @ManyToMany(mappedBy = "tags")

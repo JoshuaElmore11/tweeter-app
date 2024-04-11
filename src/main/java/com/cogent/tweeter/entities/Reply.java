@@ -16,6 +16,7 @@ import java.util.UUID;
 public class Reply {
     @Id
     private UUID id;
+    @Column(nullable = false)
     private String text;
 
     @ManyToOne(
