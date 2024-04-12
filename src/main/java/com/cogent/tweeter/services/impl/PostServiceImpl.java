@@ -40,14 +40,14 @@ public class PostServiceImpl implements PostService {
     @Override
     public Post createPost(PostPayload postPayload) {
         //check tags for existing if not create
-        Set<Tag> tags = postPayload.getTags();
-        for( Tag t: tags) {
-            if(!tagRepository.existsByName(t.getName())){
-                Tag tag = new Tag();
-                tag.setName(t.getName());
-                tagRepository.save(tag);
-            }
-        }
+//        Set<Tag> tags = postPayload.getTags();
+//        for( Tag t: tags) {
+//            if(!tagRepository.existsByName(t.getName())){
+//                Tag tag = new Tag();
+//                tag.setName(t.getName());
+//                tagRepository.save(tag);
+//            }
+//        }
         //find post's users
         User user = userRepository.findByUsername(postPayload.getUsername()).get();
         //create new post
