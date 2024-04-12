@@ -31,7 +31,7 @@ public class ReplyController {
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<Reply> findReplyById(@PathVariable UUID id){
         var data = replyService.findReplyById(id);
         if(data == null)

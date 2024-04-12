@@ -1,5 +1,6 @@
 package com.cogent.tweeter.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -47,5 +48,14 @@ public class Reply {
                     referencedColumnName = "id"
             )
     )
-    private Set<Tag> tags;
+    private Set<Tag> replyTags;
+
+    @ManyToOne(
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(
+            name="post_id",
+            nullable = false
+    )
+    private Post post;
 }

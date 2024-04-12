@@ -1,5 +1,6 @@
 package com.cogent.tweeter.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -51,5 +52,13 @@ public class Post {
             )
     )
     private Set<Tag> tags;
+
+    @OneToMany(
+            mappedBy = "post",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    @OrderBy("created")
+    private Set<Reply> replies;
 
 }

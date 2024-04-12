@@ -1,5 +1,6 @@
 package com.cogent.tweeter.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -13,21 +14,21 @@ import java.util.Set;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-@SQLInsert(sql = "INSERT IGNORE INTO tags(name) " +
-        "VALUES (?)" )
+//@SQLInsert(sql = "INSERT IGNORE INTO tags(name) " +
+//        "VALUES (?)" )
 public class Tag {
     @Id
     @GeneratedValue(
             strategy = GenerationType.IDENTITY
     )
     private int id;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "tags")
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
     private Set<Post> posts;
 
-    @ManyToMany(mappedBy = "tags")
+    @ManyToMany(mappedBy = "replyTags", fetch = FetchType.LAZY)
     private Set<Reply> replies;
 
 }
