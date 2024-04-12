@@ -4,7 +4,9 @@ import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Timestamp;
 import java.util.Set;
 import java.util.UUID;
 
@@ -17,7 +19,9 @@ public class Reply {
     @Id
     private UUID id;
     @Column(nullable = false)
-    private String text;
+    private String content;
+    @CreationTimestamp
+    private Timestamp created;
 
     @ManyToOne(
             fetch = FetchType.LAZY
