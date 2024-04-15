@@ -11,4 +11,5 @@ public interface PostService {
     List<Post> findAllPostsByUsername(String username);
     Post createPost(PostPayload postPayload);
     Post findPostById(UUID id);
+
 }

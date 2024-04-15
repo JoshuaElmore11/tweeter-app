@@ -50,7 +50,7 @@ public class ReplyServiceImpl implements ReplyService {
 //                tagRepository.save(tag);
 //            }
 //        }
-        User user = userRepository.findByUsername(replyPayload.getUsername()).get();
+        User user = userRepository.findByUsername(replyPayload.getUserName()).get();
         Post post = postRepository.findById(replyPayload.getPostId()).get();
         Reply reply = new Reply();
         reply.setId(UUID.randomUUID());
