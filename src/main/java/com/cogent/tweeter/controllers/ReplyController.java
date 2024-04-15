@@ -23,7 +23,7 @@ public class ReplyController {
         return new ResponseEntity<>(data, HttpStatus.CREATED);
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<List<Reply>> findAllRepliesByPostId(@PathVariable UUID id) {
         var data = replyService.findAllRepliesByPostId(id);
         if(data == null)
@@ -31,7 +31,7 @@ public class ReplyController {
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping
     public ResponseEntity<Reply> findReplyById(@PathVariable UUID id){
         var data = replyService.findReplyById(id);
         if(data == null)

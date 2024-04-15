@@ -25,10 +25,10 @@ public class Tag {
     @Column(nullable = false)
     private String name;
 
-    @ManyToMany(mappedBy = "tags", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "tags", fetch = FetchType.EAGER)
     private Set<Post> posts;
 
-    @ManyToMany(mappedBy = "replyTags", fetch = FetchType.LAZY)
+    @ManyToMany(mappedBy = "replyTags", fetch = FetchType.EAGER)
     private Set<Reply> replies;
 
 }

@@ -51,7 +51,7 @@ public class Reply {
     private Set<Tag> replyTags;
 
     @ManyToOne(
-            fetch = FetchType.LAZY
+            fetch = FetchType.EAGER
     )
     @JoinColumn(
             name="post_id",

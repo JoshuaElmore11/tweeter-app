@@ -9,6 +9,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1.0/tag")
@@ -29,5 +30,15 @@ public class TagController {
     @GetMapping
     public ResponseEntity<List<Tag>> getAllTags() {
         return new ResponseEntity<>(tagService.findAllTags(), HttpStatus.OK);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<Tag>> getAllTagsByPostId(@PathVariable UUID id) {
+        return new ResponseEntity<>(tagService.findTagsByPostId(id), HttpStatus.OK);
+    }
+
+    @GetMapping("/reply/{id}")
+    public ResponseEntity<List<Tag>> getAllTagsByReplyId(@PathVariable UUID id) {
+        return new ResponseEntity<>(tagService.findTagsByReplyId(id), HttpStatus.OK);
     }
 }

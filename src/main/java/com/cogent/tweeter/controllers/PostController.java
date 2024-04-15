@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.UUID;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/api/v1.0/post")
 public class PostController {
@@ -38,7 +39,7 @@ public class PostController {
         return new ResponseEntity<>(data, HttpStatus.OK);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/{id}/posts")
     public ResponseEntity<?> findPostById(@PathVariable UUID id) {
         var data = postService.findPostById(id);
         if(data==null)

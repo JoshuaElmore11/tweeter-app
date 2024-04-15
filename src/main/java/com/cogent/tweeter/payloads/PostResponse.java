@@ -1,5 +1,6 @@
 package com.cogent.tweeter.payloads;
 
+import com.cogent.tweeter.entities.Reply;
 import com.cogent.tweeter.entities.Tag;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -19,6 +20,6 @@ public class PostResponse {
     private String lastName;
     private Timestamp timestamp;
     private Set<Tag> tags;
-
+    private Set<Reply> replies;
 }
 

@@ -42,14 +42,14 @@ public class ReplyServiceImpl implements ReplyService {
 
     @Override
     public Reply createReply(ReplyPayload replyPayload) {
-//        Set<Tag> tags = replyPayload.getTags();
-//        for( Tag t: tags) {
-//            if(!tagRepository.existsByName(t.getName())){
-//                Tag tag = new Tag();
-//                tag.setName(t.getName());
-//                tagRepository.save(tag);
-//            }
-//        }
+        Set<Tag> tags = replyPayload.getTags();
+        for( Tag t: tags) {
+            if(!tagRepository.existsByName(t.getName())){
+                Tag tag = new Tag();
+                tag.setName(t.getName());
+                tagRepository.save(tag);
+            }
+        }
         User user = userRepository.findByUsername(replyPayload.getUserName()).get();
         Post post = postRepository.findById(replyPayload.getPostId()).get();
         Reply reply = new Reply();
