@@ -11,7 +11,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 public class PostPayload {
-    private String username;
+    private String userName;
     private String content;
     private Set<Tag> tags;
 }

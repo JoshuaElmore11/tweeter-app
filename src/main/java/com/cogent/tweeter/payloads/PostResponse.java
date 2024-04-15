@@ -13,7 +13,7 @@ import java.util.Set;
 @NoArgsConstructor
 @Data
 public class PostResponse {
-    private String username;
+    private String userName;
     private String content;
     private String firstName;
     private String lastName;

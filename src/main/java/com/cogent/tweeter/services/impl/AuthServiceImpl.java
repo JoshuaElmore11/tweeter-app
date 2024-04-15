@@ -2,10 +2,7 @@ package com.cogent.tweeter.services.impl;
 
 import com.cogent.tweeter.entities.Role;
 import com.cogent.tweeter.entities.User;
-import com.cogent.tweeter.payloads.LoginPayload;
-import com.cogent.tweeter.payloads.LoginResponse;
-import com.cogent.tweeter.payloads.RegisterPayload;
-import com.cogent.tweeter.payloads.RegisterResponse;
+import com.cogent.tweeter.payloads.*;
 import com.cogent.tweeter.repositories.RoleRepository;
 import com.cogent.tweeter.repositories.UserRepository;
 import com.cogent.tweeter.security.JwtTokenProvider;
@@ -39,7 +36,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public RegisterResponse register(RegisterPayload registerPayload) {
         //check username
-        if(userRepository.existsByUsername(registerPayload.getUsername())){
+        if(userRepository.existsByUsername(registerPayload.getUserName())){
             throw new RuntimeException("Username already exists");
         }
         //check email
@@ -52,7 +49,7 @@ public class AuthServiceImpl implements AuthService {
         //generate UUID for user_id
         user.setId(UUID.randomUUID());
         //set user values from payload
-        user.setUsername(registerPayload.getUsername());
+        user.setUsername(registerPayload.getUserName());
         user.setPassword(passwordEncoder.encode(registerPayload.getPassword()));
         user.setFirstName(registerPayload.getFirstName());
         user.setLastName(registerPayload.getLastName());
@@ -77,8 +74,10 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public LoginResponse login(LoginPayload loginPayload) {
+        User user = userRepository.findByUsernameOrEmail(loginPayload.getUsernameOrEmail(),loginPayload.getUsernameOrEmail()).get();
+
         Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(
-                loginPayload.getUsername(), loginPayload.getPassword()
+                loginPayload.getUsernameOrEmail(), loginPayload.getPassword()
         ));
 
         SecurityContextHolder.getContext().setAuthentication(authentication);
@@ -86,6 +85,7 @@ public class AuthServiceImpl implements AuthService {
         LoginResponse response = new LoginResponse();
         response.setMessage("Login successful");
         response.setToken(jwtTokenProvider.generateToken(authentication));
+        response.setUserName(user.getUsername());
 
         return response;
     }
@@ -93,5 +93,17 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public List<User> getAllUsers(){
         return userRepository.findAll();
+    }
+
+    @Override
+    public UserResponse getUser(String name) {
+        User user = userRepository.findByUsername(name).get();
+        UserResponse response = new UserResponse();
+
+        response.setFirstName(user.getFirstName());
+        response.setLastName(user.getLastName());
+        response.setUserName(name);
+
+        return response;
     }
 }

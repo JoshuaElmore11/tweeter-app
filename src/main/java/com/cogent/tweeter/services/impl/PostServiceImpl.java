@@ -49,7 +49,7 @@ public class PostServiceImpl implements PostService {
 //            }
 //        }
         //find post's users
-        User user = userRepository.findByUsername(postPayload.getUsername()).get();
+        User user = userRepository.findByUsername(postPayload.getUserName()).get();
         //create new post
         Post post = new Post();
         //assign UUID
