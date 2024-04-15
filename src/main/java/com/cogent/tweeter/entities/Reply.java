@@ -1,10 +1,13 @@
 package com.cogent.tweeter.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 
+import java.sql.Timestamp;
 import java.util.Set;
 import java.util.UUID;
 
@@ -17,7 +20,9 @@ public class Reply {
     @Id
     private UUID id;
     @Column(nullable = false)
-    private String text;
+    private String content;
+    @CreationTimestamp
+    private Timestamp created;
 
     @ManyToOne(
             fetch = FetchType.LAZY
@@ -43,5 +48,14 @@ public class Reply {
                     referencedColumnName = "id"
             )
     )
-    private Set<Tag> tags;
+    private Set<Tag> replyTags;
+
+    @ManyToOne(
+            fetch = FetchType.LAZY
+    )
+    @JoinColumn(
+            name="post_id",
+            nullable = false
+    )
+    private Post post;
 }

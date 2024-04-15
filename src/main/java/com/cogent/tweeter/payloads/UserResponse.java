@@ -7,8 +7,8 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class LoginResponse {
-    private String message;
-    private String token;
+public class UserResponse {
+    private String firstName;
+    private String lastName;
     private String userName;
 }
